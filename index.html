@@ -45,7 +45,7 @@ fetch('data/PropertyPriceRegister.geojson')
 
             pointToLayer: function(feature, latlng) {
 
-                let colour = '#1f78b4';
+                let colour = '#7b2cbf';
 
                 if (feature.properties.PriceType === 'Under Full Market') {
                     colour = '#e31a1c';
@@ -88,7 +88,7 @@ fetch('data/rivers.geojson')
 
         L.geoJSON(data, {
             style: {
-                color: '#00c8ff',
+                color: '#0080ff',
                 weight: 0.75
             }
         }).addTo(map);
