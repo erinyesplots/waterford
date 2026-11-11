@@ -74,7 +74,18 @@ fetch('data/PropertyPriceRegister.geojson')
         map.fitBounds(prices.getBounds());
 
     });
+fetch('data/rivers.geojson')
+    .then(response => response.json())
+    .then(data => {
 
+        L.geoJSON(data, {
+            style: {
+                color: '#0080ff',
+                weight: 2
+            }
+        }).addTo(map);
+
+    });
 </script>
 
 </body>
