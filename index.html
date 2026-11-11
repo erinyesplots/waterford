@@ -114,6 +114,37 @@ fetch('data/woods.geojson')
         }).addTo(map);
 
     });  
+
+fetch('data/twenty.geojson')
+    .then(response => response.json())
+    .then(data => {
+
+        L.geoJSON(data, {
+            style: {
+                color: '#31a354',
+                fillColor: '#31a354',
+                fillOpacity: 0.20,
+                weight: 2
+            }
+        }).addTo(map);
+
+    });
+
+    fetch('data/ten.geojson')
+    .then(response => response.json())
+    .then(data => {
+
+        L.geoJSON(data, {
+            style: {
+                color: '#78c679',
+                fillColor: '#78c679',
+                fillOpacity: 0.25,
+                weight: 2
+            }
+        }).addTo(map);
+
+    });
+    
 </script>
 
 </body>
