@@ -48,7 +48,7 @@ fetch('data/PropertyPriceRegister.geojson')
                 let colour = '#7b2cbf';
 
                 if (feature.properties.PriceType === 'Under Full Market') {
-                    colour = '#e31a1c';
+                    colour = '#008B8B';
                 }
 
                 return L.circleMarker(latlng, {
@@ -88,7 +88,7 @@ fetch('data/rivers.geojson')
 
         L.geoJSON(data, {
             style: {
-                color: '#0080ff',
+                color: '#00C8FF',
                 weight: 0.5
             }
         }).addTo(map);
@@ -116,7 +116,7 @@ fetch('data/twenty.geojson')
 
         L.geoJSON(data, {
             style: {
-                color: '#fdb515',
+                color: '#C9A227',
                 fillOpacity: 0,
                 weight: 2
             }
@@ -129,7 +129,7 @@ fetch('data/thirty.geojson')
 
         L.geoJSON(data, {
             style: {
-                color: '#8B0000',
+                color: '#8B2E2E',
                 fillOpacity: 0,
                 weight: 2
             }
@@ -144,7 +144,7 @@ fetch('data/ten.geojson')
 
         L.geoJSON(data, {
             style: {
-                color: '#00AA00',
+                color: '#3A7D44',
                 fillOpacity: 0,
                 weight: 2
             }
