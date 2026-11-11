@@ -1,13 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Waterford Property Map</title>
+
+  <link rel="stylesheet"
+href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <style>
+        body {
+            margin: 0;
+        }
+
+        #map {
+            height: 100vh;
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+
+<div id="map"></div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
 <script>
 
 const map = L.map('map').setView([52.15, -7.15], 10);
-
-let pricesLayer;
-let riversLayer;
-let woodsLayer;
-let twentyLayer;
-let thirtyLayer;
-let tenLayer;
 
 L.tileLayer(
     'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
@@ -20,7 +40,7 @@ fetch('data/PropertyPriceRegister.geojson')
     .then(response => response.json())
     .then(data => {
 
-        pricesLayer = L.geoJSON(data, {
+        const prices = L.geoJSON(data, {
 
             pointToLayer: function(feature, latlng) {
 
@@ -55,9 +75,9 @@ fetch('data/PropertyPriceRegister.geojson')
 
         });
 
-        pricesLayer.addTo(map);
+        prices.addTo(map);
 
-        map.fitBounds(pricesLayer.getBounds());
+        map.fitBounds(prices.getBounds());
 
     });
 
@@ -65,14 +85,12 @@ fetch('data/rivers.geojson')
     .then(response => response.json())
     .then(data => {
 
-        riversLayer = L.geoJSON(data, {
+        L.geoJSON(data, {
             style: {
                 color: '#00C8FF',
                 weight: 0.5
             }
-        });
-
-        riversLayer.addTo(map);
+        }).addTo(map);
 
     });
 
@@ -80,16 +98,14 @@ fetch('data/woods.geojson')
     .then(response => response.json())
     .then(data => {
 
-        woodsLayer = L.geoJSON(data, {
+        L.geoJSON(data, {
             style: {
                 color: '#006400',
                 fillColor: '#228B22',
                 fillOpacity: 0.4,
                 weight: 1
             }
-        });
-
-        woodsLayer.addTo(map);
+        }).addTo(map);
 
     });
 
@@ -97,50 +113,45 @@ fetch('data/twenty.geojson')
     .then(response => response.json())
     .then(data => {
 
-        twentyLayer = L.geoJSON(data, {
+        L.geoJSON(data, {
             style: {
                 color: '#C9A227',
                 fillOpacity: 0,
                 weight: 2
             }
-        });
-
-        twentyLayer.addTo(map);
+        }).addTo(map);
 
     });
-
 fetch('data/thirty.geojson')
     .then(response => response.json())
     .then(data => {
 
-        thirtyLayer = L.geoJSON(data, {
+        L.geoJSON(data, {
             style: {
                 color: '#8B2E2E',
                 fillOpacity: 0,
                 weight: 2
             }
-        });
-
-        thirtyLayer.addTo(map);
+        }).addTo(map);
 
     });
+
 
 fetch('data/ten.geojson')
     .then(response => response.json())
     .then(data => {
 
-        tenLayer = L.geoJSON(data, {
+        L.geoJSON(data, {
             style: {
                 color: '#3A7D44',
                 fillOpacity: 0,
                 weight: 2
             }
-        });
-
-        tenLayer.addTo(map);
+        }).addTo(map);
 
     });
 
-setTimeout(function () {
+</script>
 
- 
+</body>
+</html>
