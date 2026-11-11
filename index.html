@@ -86,6 +86,21 @@ fetch('data/rivers.geojson')
         }).addTo(map);
 
     });
+fetch('data/woods.geojson')
+    .then(response => response.json())
+    .then(data => {
+
+        L.geoJSON(data, {
+            style: {
+                color: '#006400',
+                fillColor: '#228B22',
+                fillOpacity: 0.4,
+                weight: 1
+            }
+        }).addTo(map);
+
+    });
+    
 </script>
 
 </body>
