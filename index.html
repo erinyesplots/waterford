@@ -46,7 +46,7 @@ fetch('data/PropertyPriceRegister.geojson')
             pointToLayer: function(feature, latlng) {
 
                 return L.circleMarker(latlng, {
-                    radius: 5,
+                    radius: 3,
                     fillColor: '#ff6600',
                     color: '#ffffff',
                     weight: 1,
@@ -81,7 +81,7 @@ fetch('data/rivers.geojson')
         L.geoJSON(data, {
             style: {
                 color: '#0080ff',
-                weight: 2
+                weight: .75
             }
         }).addTo(map);
 
@@ -106,9 +106,9 @@ fetch('data/woods.geojson')
 
         L.geoJSON(data, {
             style: {
-                color: '#006837',
+                color: '#CC0000',
                 fillColor: '#006837',
-                fillOpacity: 0.15,
+                fillOpacity: 0,
                 weight: 2
             }
         }).addTo(map);
@@ -121,9 +121,9 @@ fetch('data/twenty.geojson')
 
         L.geoJSON(data, {
             style: {
-                color: '#31a354',
+                color: '#FF9900',
                 fillColor: '#31a354',
-                fillOpacity: 0.20,
+                fillOpacity: 0,
                 weight: 2
             }
         }).addTo(map);
@@ -136,9 +136,9 @@ fetch('data/twenty.geojson')
 
         L.geoJSON(data, {
             style: {
-                color: '#78c679',
+                color: '#00AA00',
                 fillColor: '#78c679',
-                fillOpacity: 0.25,
+                fillOpacity: 0,
                 weight: 2
             }
         }).addTo(map);
