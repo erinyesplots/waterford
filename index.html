@@ -45,4 +45,114 @@ fetch('data/PropertyPriceRegister.geojson')
 
             pointToLayer: function(feature, latlng) {
 
-     
+                let colour = '#7b2cbf';
+
+                if (feature.properties.PriceType === 'Under Full Market') {
+                    colour = '#e31a1c';
+                }
+
+                return L.circleMarker(latlng, {
+                    radius: 4,
+                    fillColor: colour,
+                    color: '#ffffff',
+                    weight: 1,
+                    fillOpacity: 0.9
+                });
+
+            },
+
+            onEachFeature: function(feature, layer) {
+
+                const p = feature.properties;
+
+                layer.bindPopup(
+                    "<b>Price:</b> €" + p.Price.toLocaleString() +
+                    "<br><b>Price Type:</b> " + p.PriceType +
+                    "<br><b>Address:</b> " + p.Address +
+                    "<br><b>Eircode:</b> " + p.Eircode
+                );
+
+            }
+
+        });
+
+        prices.addTo(map);
+
+        map.fitBounds(prices.getBounds());
+
+    });
+
+fetch('data/rivers.geojson')
+    .then(response => response.json())
+    .then(data => {
+
+        L.geoJSON(data, {
+            style: {
+                color: '#00c8ff',
+                weight: 0.75
+            }
+        }).addTo(map);
+
+    });
+
+fetch('data/woods.geojson')
+    .then(response => response.json())
+    .then(data => {
+
+        L.geoJSON(data, {
+            style: {
+                color: '#006400',
+                fillColor: '#228B22',
+                fillOpacity: 0.4,
+                weight: 1
+            }
+        }).addTo(map);
+
+    });
+
+fetch('data/thirty.geojson')
+    .then(response => response.json())
+    .then(data => {
+
+        L.geoJSON(data, {
+            style: {
+                color: '#CC0000',
+                fillOpacity: 0,
+                weight: 2
+            }
+        }).addTo(map);
+
+    });
+
+fetch('data/twenty.geojson')
+    .then(response => response.json())
+    .then(data => {
+
+        L.geoJSON(data, {
+            style: {
+                color: '#8000FF',
+                fillOpacity: 0,
+                weight: 2
+            }
+        }).addTo(map);
+
+    });
+
+fetch('data/ten.geojson')
+    .then(response => response.json())
+    .then(data => {
+
+        L.geoJSON(data, {
+            style: {
+                color: '#00AA00',
+                fillOpacity: 0,
+                weight: 2
+            }
+        }).addTo(map);
+
+    });
+
+</script>
+
+</body>
+</html>
