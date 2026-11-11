@@ -1,31 +1,3 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-    <meta charset="utf-8">
-    <title>Waterford Property Map</title>
-
-    <link rel="stylesheet"
-        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-
-    <style>
-        body {
-            margin: 0;
-        }
-
-        #map {
-            height: 100vh;
-            width: 100%;
-        }
-    </style>
-</head>
-
-<body>
-
-<div id="map"></div>
-
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-
 <script>
 
 const map = L.map('map').setView([52.15, -7.15], 10);
@@ -33,9 +5,9 @@ const map = L.map('map').setView([52.15, -7.15], 10);
 let pricesLayer;
 let riversLayer;
 let woodsLayer;
-let tenLayer;
 let twentyLayer;
 let thirtyLayer;
+let tenLayer;
 
 L.tileLayer(
     'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
@@ -55,7 +27,7 @@ fetch('data/PropertyPriceRegister.geojson')
                 let colour = '#7b2cbf';
 
                 if (feature.properties.PriceType === 'Under Full Market') {
-                    colour = '#C2185B';
+                    colour = '#2A9D8F';
                 }
 
                 return L.circleMarker(latlng, {
@@ -112,4 +84,63 @@ fetch('data/woods.geojson')
             style: {
                 color: '#006400',
                 fillColor: '#228B22',
-   
+                fillOpacity: 0.4,
+                weight: 1
+            }
+        });
+
+        woodsLayer.addTo(map);
+
+    });
+
+fetch('data/twenty.geojson')
+    .then(response => response.json())
+    .then(data => {
+
+        twentyLayer = L.geoJSON(data, {
+            style: {
+                color: '#C9A227',
+                fillOpacity: 0,
+                weight: 2
+            }
+        });
+
+        twentyLayer.addTo(map);
+
+    });
+
+fetch('data/thirty.geojson')
+    .then(response => response.json())
+    .then(data => {
+
+        thirtyLayer = L.geoJSON(data, {
+            style: {
+                color: '#8B2E2E',
+                fillOpacity: 0,
+                weight: 2
+            }
+        });
+
+        thirtyLayer.addTo(map);
+
+    });
+
+fetch('data/ten.geojson')
+    .then(response => response.json())
+    .then(data => {
+
+        tenLayer = L.geoJSON(data, {
+            style: {
+                color: '#3A7D44',
+                fillOpacity: 0,
+                weight: 2
+            }
+        });
+
+        tenLayer.addTo(map);
+
+    });
+
+setTimeout(function () {
+
+ 
