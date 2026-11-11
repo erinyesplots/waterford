@@ -110,6 +110,19 @@ fetch('data/woods.geojson')
 
     });
 
+fetch('data/twenty.geojson')
+    .then(response => response.json())
+    .then(data => {
+
+        L.geoJSON(data, {
+            style: {
+                color: '#fdb515',
+                fillOpacity: 0,
+                weight: 2
+            }
+        }).addTo(map);
+
+    });
 fetch('data/thirty.geojson')
     .then(response => response.json())
     .then(data => {
@@ -124,19 +137,6 @@ fetch('data/thirty.geojson')
 
     });
 
-fetch('data/twenty.geojson')
-    .then(response => response.json())
-    .then(data => {
-
-        L.geoJSON(data, {
-            style: {
-                color: '#FFDF00',
-                fillOpacity: 0,
-                weight: 2
-            }
-        }).addTo(map);
-
-    });
 
 fetch('data/ten.geojson')
     .then(response => response.json())
