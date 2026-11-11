@@ -36,6 +36,30 @@ L.tileLayer(
     }
 ).addTo(map);
 
+// Create empty layer groups
+
+const pricesLayer = L.layerGroup().addTo(map);
+const riversLayer = L.layerGroup().addTo(map);
+const woodsLayer = L.layerGroup().addTo(map);
+const tenLayer = L.layerGroup().addTo(map);
+const twentyLayer = L.layerGroup().addTo(map);
+const thirtyLayer = L.layerGroup().addTo(map);
+
+// Layer control
+
+L.control.layers(null, {
+    "Property Prices": pricesLayer,
+    "Rivers": riversLayer,
+    "Woodlands": woodsLayer,
+    "10 Minute Drive Time": tenLayer,
+    "20 Minute Drive Time": twentyLayer,
+    "30 Minute Drive Time": thirtyLayer
+}, {
+    collapsed: false
+}).addTo(map);
+
+// Property prices
+
 fetch('data/PropertyPriceRegister.geojson')
     .then(response => response.json())
     .then(data => {
@@ -75,11 +99,13 @@ fetch('data/PropertyPriceRegister.geojson')
 
         });
 
-        prices.addTo(map);
+        prices.addTo(pricesLayer);
 
         map.fitBounds(prices.getBounds());
 
     });
+
+// Rivers
 
 fetch('data/rivers.geojson')
     .then(response => response.json())
@@ -90,9 +116,11 @@ fetch('data/rivers.geojson')
                 color: '#00C8FF',
                 weight: 0.5
             }
-        }).addTo(map);
+        }).addTo(riversLayer);
 
     });
+
+// Woods
 
 fetch('data/woods.geojson')
     .then(response => response.json())
@@ -105,9 +133,27 @@ fetch('data/woods.geojson')
                 fillOpacity: 0.4,
                 weight: 1
             }
-        }).addTo(map);
+        }).addTo(woodsLayer);
 
     });
+
+// 30 minutes
+
+fetch('data/thirty.geojson')
+    .then(response => response.json())
+    .then(data => {
+
+        L.geoJSON(data, {
+            style: {
+                color: '#8B2E2E',
+                fillOpacity: 0,
+                weight: 2
+            }
+        }).addTo(thirtyLayer);
+
+    });
+
+// 20 minutes
 
 fetch('data/twenty.geojson')
     .then(response => response.json())
@@ -119,23 +165,11 @@ fetch('data/twenty.geojson')
                 fillOpacity: 0,
                 weight: 2
             }
-        }).addTo(map);
-
-    });
-fetch('data/thirty.geojson')
-    .then(response => response.json())
-    .then(data => {
-
-        L.geoJSON(data, {
-            style: {
-                color: '#8B2E2E',
-                fillOpacity: 0,
-                weight: 2
-            }
-        }).addTo(map);
+        }).addTo(twentyLayer);
 
     });
 
+// 10 minutes
 
 fetch('data/ten.geojson')
     .then(response => response.json())
@@ -147,10 +181,9 @@ fetch('data/ten.geojson')
                 fillOpacity: 0,
                 weight: 2
             }
-        }).addTo(map);
+        }).addTo(tenLayer);
 
     });
-
 </script>
 
 </body>
