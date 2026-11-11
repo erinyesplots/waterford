@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>My Online Map</title>
+    <title>Waterford Property Map</title>
 
     <link rel="stylesheet"
         href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
@@ -28,7 +28,7 @@
 
 <script>
 
-const map = L.map('map').setView([51.8985, -8.4756], 10);
+const map = L.map('map').setView([52.15, -7.15], 10);
 
 L.tileLayer(
     'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
@@ -37,15 +37,41 @@ L.tileLayer(
     }
 ).addTo(map);
 
-fetch('data/roads.geojson')
+fetch('data/PropertyPriceRegister.geojson')
     .then(response => response.json())
     .then(data => {
 
-        const layer = L.geoJSON(data);
+        const prices = L.geoJSON(data, {
 
-        layer.addTo(map);
+            pointToLayer: function(feature, latlng) {
 
-        map.fitBounds(layer.getBounds());
+                return L.circleMarker(latlng, {
+                    radius: 5,
+                    fillColor: '#ff6600',
+                    color: '#ffffff',
+                    weight: 1,
+                    fillOpacity: 0.8
+                });
+
+            },
+
+            onEachFeature: function(feature, layer) {
+
+                const p = feature.properties;
+
+                layer.bindPopup(
+                    "<b>Price:</b> €" + p.Price.toLocaleString() +
+                    "<br><b>Address:</b> " + p.Address +
+                    "<br><b>Eircode:</b> " + p.Eircode
+                );
+
+            }
+
+        });
+
+        prices.addTo(map);
+
+        map.fitBounds(prices.getBounds());
 
     });
 
