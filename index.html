@@ -16,6 +16,14 @@ href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
             height: 100vh;
             width: 100%;
         }
+        .priceLabel {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    color: #444444;
+    font-size: 8px;
+    font-weight: bold;
+}
     </style>
 </head>
 
@@ -44,11 +52,13 @@ const woodsLayer = L.layerGroup().addTo(map);
 const tenLayer = L.layerGroup().addTo(map);
 const twentyLayer = L.layerGroup().addTo(map);
 const thirtyLayer = L.layerGroup().addTo(map);
+const labelsLayer = L.layerGroup().addTo(map);
 
 // Layer control
 
 L.control.layers(null, {
     "Property Prices": pricesLayer,
+    "Price Labels": labelsLayer,
     "Rivers": riversLayer,
     "Broadleaved Woodlands": woodsLayer,
     "10 Minute Drive Time": tenLayer,
@@ -99,9 +109,35 @@ fetch('data/PropertyPriceRegister.geojson')
 
         });
 
-        prices.addTo(pricesLayer);
+      prices.addTo(pricesLayer);
 
-        map.fitBounds(prices.getBounds());
+data.features.forEach(function(feature) {
+
+    const coords = feature.geometry.coordinates;
+
+    const labelMarker = L.marker(
+        [coords[1], coords[0]],
+        {
+            opacity: 0,
+            interactive: false
+        }
+    );
+
+    labelMarker.bindTooltip(
+        feature.properties.PriceinK.toString(),
+        {
+            permanent: true,
+            direction: 'right',
+            offset: [3, 0],
+            className: 'priceLabel'
+        }
+    );
+
+    labelMarker.addTo(labelsLayer);
+
+});
+
+map.fitBounds(prices.getBounds());
 
     });
 
