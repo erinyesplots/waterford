@@ -28,7 +28,24 @@ href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 .priceLabel:before {
     display: none;
 }
-       
+    .legend {
+    background: white;
+    padding: 8px 10px;
+    line-height: 18px;
+    color: #333;
+    border-radius: 5px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    font-size: 12px;
+}
+
+.legend i {
+    width: 10px;
+    height: 10px;
+    float: left;
+    margin-right: 6px;
+    margin-top: 4px;
+    border-radius: 50%;
+}   
     </style>
 </head>
 
@@ -225,6 +242,21 @@ fetch('data/ten.geojson')
         }).addTo(tenLayer);
 
     });
+    const legend = L.control({position: 'bottomright'});
+
+legend.onAdd = function () {
+
+    const div = L.DomUtil.create('div', 'legend');
+
+    div.innerHTML =
+        '<b>Property Prices</b><br>' +
+        '<i style="background:#7b2cbf"></i> Market Price<br>' +
+        '<i style="background:#cbc3e3"></i> Under Full Market';
+
+    return div;
+};
+
+legend.addTo(map);
 </script>
 
 </body>
