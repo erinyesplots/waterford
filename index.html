@@ -57,7 +57,7 @@ const labelsLayer = L.layerGroup().addTo(map);
 // Layer control
 
 L.control.layers(null, {
-    "Property Prices": pricesLayer,
+    "Sold 2024-2026": pricesLayer,
     "Price Labels": labelsLayer,
     "Rivers": riversLayer,
     "Broadleaved Woodlands": woodsLayer,
@@ -68,7 +68,7 @@ L.control.layers(null, {
     collapsed: false
 }).addTo(map);
 
-// Property prices
+// Sold 2024-2026
 
 fetch('data/PropertyPriceRegister.geojson')
     .then(response => response.json())
