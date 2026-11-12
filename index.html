@@ -59,12 +59,21 @@ href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 
 const map = L.map('map').setView([52.15, -7.15], 10);
 
-L.tileLayer(
+const osm = L.tileLayer(
     'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
     {
         attribution: '&copy; OpenStreetMap contributors'
     }
-).addTo(map);
+);
+
+const imagery = L.tileLayer(
+    'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
+    {
+        attribution: 'Tiles © Esri'
+    }
+);
+
+osm.addTo(map);
 
 // Create empty layer groups
 
@@ -78,17 +87,24 @@ const thirtyLayer = L.layerGroup().addTo(map);
 
 // Layer control
 
-L.control.layers(null, {
-    "Sold 2024-2026": pricesLayer,
+L.control.layers(
+{
+    "OpenStreetMap": osm,
+    "Aerial Imagery": imagery
+},
+{
+    "Property Prices": pricesLayer,
     "Price Labels": labelsLayer,
     "Rivers": riversLayer,
     "Broadleaved Woodlands": woodsLayer,
     "10 Minute Drive Time": tenLayer,
     "20 Minute Drive Time": twentyLayer,
     "30 Minute Drive Time": thirtyLayer
-}, {
+},
+{
     collapsed: false
-}).addTo(map);
+}
+).addTo(map);
 
 // Sold 2024-2026
 
