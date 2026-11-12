@@ -50,7 +50,7 @@ const thirtyLayer = L.layerGroup().addTo(map);
 L.control.layers(null, {
     "Property Prices": pricesLayer,
     "Rivers": riversLayer,
-    "Woodlands": woodsLayer,
+    "Broadleaved Woodlands": woodsLayer,
     "10 Minute Drive Time": tenLayer,
     "20 Minute Drive Time": twentyLayer,
     "30 Minute Drive Time": thirtyLayer
@@ -71,7 +71,7 @@ fetch('data/PropertyPriceRegister.geojson')
                 let colour = '#7b2cbf';
 
                 if (feature.properties.PriceType === 'Under Full Market') {
-                    colour = '#FF00FF';
+                    colour = '#4E0535';
                 }
 
                 return L.circleMarker(latlng, {
