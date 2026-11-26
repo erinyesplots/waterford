@@ -84,6 +84,7 @@ const woodsLayer = L.layerGroup().addTo(map);
 const tenLayer = L.layerGroup().addTo(map);
 const twentyLayer = L.layerGroup().addTo(map);
 const thirtyLayer = L.layerGroup().addTo(map);
+const gaeltachtLayer = L.layerGroup().addTo(map);
 
 // Layer control
 
@@ -97,6 +98,7 @@ L.control.layers(
     "Price Labels": labelsLayer,
     "Rivers": riversLayer,
     "Broadleaved Woodlands": woodsLayer,
+    "Gaeltacht Areas": gaeltachtLayer,
     "10 Minute Drive Time": tenLayer,
     "20 Minute Drive Time": twentyLayer,
     "30 Minute Drive Time": thirtyLayer
@@ -211,6 +213,34 @@ fetch('data/woods.geojson')
 
     });
 
+// Gaeltacht Areas
+
+fetch('data/gaeltacht.geojson')
+    .then(response => response.json())
+    .then(data => {
+       
+        L.geoJSON(data, {
+style: {
+    color: '#08519c',
+    fillColor: '#3182bd',
+    fillOpacity: 0.15,
+    weight: 2,
+    dashArray: '5,5'
+           },
+            onEachFeature: function(feature, layer) {
+
+                if (feature.properties && feature.properties.NAME) {
+                    layer.bindPopup(
+                        '<b>Gaeltacht Area:</b> ' +
+                        feature.properties.NAME
+                    );
+                }
+
+            }
+        }).addTo(gaeltachtLayer);
+
+    });
+    
 // 30 minutes
 
 fetch('data/thirty.geojson')
